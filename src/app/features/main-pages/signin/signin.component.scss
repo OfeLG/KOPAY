@@ -1,0 +1,50 @@
+@import 'src/app/styles/colors-letters.scss';
+@import 'src/app/styles/button_input.scss';
+.div_signin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: $dark-blue;
+    .content{
+        width: 35%;
+        height: 80%;
+        padding: 30px;
+        border-radius: 10px;
+        background: white;
+        button{
+            width: 100%;
+        }
+        .div_logo_name{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h1{
+                margin: 7px;
+                color: $gray-letter;
+            }
+            img{
+                width: 90px;
+                height: 70px;
+                cursor: pointer;
+            }
+        }
+        .div_logo_name, button, input{
+           margin-bottom: 20px;
+        }
+        .div_code{
+            text-align: justify;
+            height: fit-content;
+            margin-bottom: 20px;
+            p{
+                color: $gray-letter;
+            }
+            P, input{
+                margin: 0px;
+                margin-bottom: 7px;
+            }
+        }
+    }
+}

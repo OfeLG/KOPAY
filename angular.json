@@ -23,7 +23,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/assets/logo-kopay.png" 
+              "src/assets/logo-kopay.png"
             ],
             "styles": [
               "src/styles.css"

@@ -1,0 +1,48 @@
+@import '../../app/styles/colors-letters.scss';
+
+.buttons{
+    border-radius: 6px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.button_dark_blue{
+    background-color: $dark-blue;
+    border: 1px solid $dark-blue;
+    color: $light-gray-letter;
+    &:active {
+        background-color: $dark-blue-change; // Cambiamos el color de fondo cuando se hace clic
+    }
+}
+
+.button_light_blue{
+    background-color: $light-blue;
+    border: 1px solid $light-blue;
+    color: $gray-letter;
+    &:active {
+        background-color: $white-change; // Cambiamos el color de fondo cuando se hace clic
+    }
+}
+.button_white{
+    background-color: white;
+    border: 1px solid $dark-blue;
+    color: $gray-letter;
+    &:active {
+        background-color: $white-change; // Cambiamos el color de fondo cuando se hace clic
+    }
+}
+
+
+.input_style{
+    width: 100%;
+    border-radius: 6px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 18px;
+    border: 1px solid $gray-letter;
+    &:focus {
+        outline: none;
+    }
+}

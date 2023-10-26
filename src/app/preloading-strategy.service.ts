@@ -12,7 +12,7 @@ export class PreloadingStrategyService implements PreloadingStrategy{
 
   preload(route: Route, fn: () => Observable<any>): Observable<any> {
       const loadRoute = (delay: number) => delay > 0 ? timer(delay * 1000).pipe(switchMap(() => fn())) : fn();
-      if (route.data && route.data['preload'] && (!this.router.url.includes('/mainPages')) && (!this.router.url.includes('/home'))) {
+      if (route.data && route.data['preload'] && (!this.router.url.includes('/mainPages')) && (!this.router.url.includes('/workerUser'))) {
           const delay = route.data['loadAfterSeconds'] ? route.data['loadAfterSeconds'] : 0;
 
           return loadRoute(delay);

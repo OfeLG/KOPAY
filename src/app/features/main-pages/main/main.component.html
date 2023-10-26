@@ -1,1 +1,39 @@
-<p>main works!</p>
+<div class="div_main">
+    <div class="left_section">
+        <div class="div_ul">
+            <ul class="position_ul">
+                <li class="content_slider">
+                    <div class="image">
+                        <img src="{{array_main[index].img}}" alt="{{'card -'+index}}">
+                    </div>
+                    <div class="contents">
+                        <h2>{{array_main[index].title}}</h2>
+                        <p>{{array_main[index].description}}</p>
+                    </div>
+                </li>
+            </ul>
+            <ul class="position_icons">
+                <li (click)="count('-')"><img src="../../../../assets/icon_before.png" alt="Icon before"></li>
+                <li (click)="count('+')"><img src="../../../../assets/icon_after.png" alt="Icon after"></li>
+            </ul>
+        </div>
+    </div>
+    <div class="right_section">
+        <div class="div_login_options">
+            <div class="div_logo_name">
+                <img src="../../../../assets/logo_kopay.png" alt="Logo de KOPAY">
+                <h1>KOPAY</h1>
+            </div>
+            <div class="div_login_option">
+                <h3>Si usas Kopay:</h3>
+                <button class="buttons button_dark_blue" (click)="navigate('login')">Inicia sesión</button>
+            </div>
+            <div class="div_registration_option">
+                <h3>Si es tu primera vez usando Kopay:</h3>
+                <button class="buttons button_white" (click)="navigate('signin')">Crea una cuenta</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,90 @@
+@import 'src/app/styles/colors-letters.scss';
+
+.div_nav_bar{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background: $dark-blue;
+    color: $light-gray-letter;
+    i{
+        font-size: 16px;
+        margin-right: 10px;
+    }
+    .div_logo_name, .div_user, .div_options, .div_Sign_off{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .div_logo_name{
+        display: flex;
+        align-items: center;
+        height: 7%;
+        img{
+            width: 50px;
+            height: 40px;
+            margin-right: 10px;
+        }
+    }
+    .div_user{
+        height: 30%;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 10px;
+        background: $light-gray-letter;
+        color: $dark-blue;
+        .div_profile{
+            display: flex;
+            align-items: center;
+            height: 60%;
+            img{
+                width: 45px;
+                height: 45px;
+                border-radius: 50px;
+            }
+            .div_name{
+                margin-left: 10px;
+                p:first-child{
+                    font-weight: bold;
+                    margin: 5px;
+                }
+                p:nth-child(2){
+                    font-size: 15px;
+                    margin: 5px;
+                }
+            }
+        }
+        hr{
+            margin: 10px;
+        }
+        strong{
+            font-size: 15px;
+            cursor: pointer;
+        }
+    }
+    .div_options{
+        height: 60%;
+        ul{
+            padding: 0px;
+            list-style-type: none;
+            li{
+                margin: 20px 0px;
+                padding: 10px 23px;
+                cursor: pointer;
+                &:hover{
+                    background: $light-gray-letter;
+                    color: $dark-blue;
+                    border-radius: 10px;
+                }
+            }
+        }
+    }
+    .div_Sign_off{
+        padding-left: 23px;
+        a{
+            text-decoration:none;
+            color: rgb(224, 114, 114);
+        }
+    }
+}

@@ -1,0 +1,58 @@
+<!-- PARA WORKER -->
+
+<div class="div_nav_bar" *ngIf="type_user=='worker'">
+    <div class="div_logo_name">
+        <img src="../../../../assets/logo_kopay_2.png" alt="Logo KOPAY">
+        <h2>KOPAY</h2>
+    </div>
+    <div class="div_user">
+        <div class="div_profile">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="Foto de perfil">
+            <div class="div_name">
+                <p>Ofelia L</p>
+                <p>Cortador</p>
+            </div>
+        </div>
+        <hr>
+        <p><i class="fa fa-gear"></i><strong>Configuración</strong></p>
+    </div>
+    <div class="div_options">
+        <ul>
+            <li><i class="fa fa-cube"></i> Mis paquetes</li>
+            <li><i class="fa fa-plus"></i> Productos</li>
+        </ul>
+    </div>
+    <div class="div_Sign_off">
+        <a href="mainPages/recover"><i class="fa fa-store-slash"></i> Cerrar sesión</a>
+    </div>
+</div>
+
+<!-- PARA ADMIN -->
+
+<div class="div_nav_bar" *ngIf="type_user=='admin'">
+    <div class="div_logo_name">
+        <img src="../../../../assets/logo_kopay_2.png" alt="Logo KOPAY">
+        <h2>KOPAY</h2>
+    </div>
+    <div class="div_user">
+        <div class="div_profile">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="Foto de perfil">
+            <div class="div_name">
+                <p>Keiddy G</p>
+                <p>Administrador</p>
+            </div>
+        </div>
+        <hr>
+        <p><i class="fa fa-gear"></i><strong>Configuración</strong></p>
+    </div>
+    <div class="div_options">
+        <ul>
+            <li><i class="fa fa-wallet"></i> Movimientos</li>
+            <li><i class="fa fa-cubes"></i> Productos</li>
+            <li><i class="fa fa-user-nurse"></i> Empleados</li>
+        </ul>
+    </div>
+    <div class="div_Sign_off">
+        <a href="mainPages/recover"><i class="fa fa-store-slash"></i> Cerrar sesión</a>
+    </div>
+</div>

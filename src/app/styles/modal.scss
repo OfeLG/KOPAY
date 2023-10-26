@@ -1,0 +1,104 @@
+@import 'src/app/styles/colors-letters.scss';
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    &.show {
+        display: block;
+        animation: modal-show 0.3s ease-out forwards;
+    }
+
+    .modal_content {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        //width: 70%; // (80% antes) Ajusta el ancho según tus necesidades desde el documento qn el que vayas a importarlo
+        max-width: 600px;
+        // max-height: 80vh;
+        padding: 20px; // Ajusta el relleno según tus necesidades
+        overflow-y: auto;
+        background: #FBFAFA;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px $light-blue;
+
+        &.show {
+            display: block;
+            animation: modal-show 0.3s ease-out forwards;
+        }
+
+        .close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 25px;
+            padding: 2%;
+            color: $light-gray-letter;
+            cursor: pointer;
+
+            &:hover {
+                color: $dark-blue;
+            }
+        }
+    }
+}
+
+
+//________________MODAL DERECHO___________________
+.right_modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0; /* Cambia "left" por "right" para colocarlo en la parte derecha */
+    height: 100%;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    &.show {
+        display: block;
+        animation: modal-show 0.3s ease-out forwards;
+    }
+
+    .right_modal_content {
+        display: none;
+        position: absolute;
+        top: 0; /* Cambia "top" a 0 para que comience desde la parte superior */
+        right: 0; /* Ajusta la posición derecha según sea necesario */
+        bottom: 0; /* Ajusta la posición inferior según sea necesario */
+        transform: translate(0, 0); /* Elimina la transformación */
+        width: 70%; /* Ajusta el ancho según tus necesidades */
+        max-width: 600px;
+        padding: 20px;
+        overflow-y: auto;
+        background: #FBFAFA;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px $light-blue;
+
+        &.show {
+            display: block;
+            animation: modal-show 0.3s ease-out forwards;
+        }
+
+        .close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 25px;
+            padding: 2%;
+            color: $light-gray-letter;
+            cursor: pointer;
+
+            &:hover {
+                color: $dark-blue;
+            }
+        }
+    }
+}

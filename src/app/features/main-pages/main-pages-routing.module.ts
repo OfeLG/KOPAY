@@ -1,23 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MainComponent } from '../main-pages/main/main.component';
+import { MainComponent } from './main/main.component';
+import { LoginComponent } from './login/login.component';
+import { SigninComponent } from './signin/signin.component';
+import { MainPagesComponent } from './main-pages.component';
+import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 
 
 const routes: Routes = [
     {
-      path: '', redirectTo: '/mainPages/home', pathMatch: 'full'
+      path: '', redirectTo: '/mainPages/main', pathMatch: 'full'
     },
   
     {
-      path: '', component: MainComponent,
+      path: '', component: MainPagesComponent,
       children: [
-        { path: 'home', component: MainComponent },
+        { path: 'main', component: MainComponent },
+        { path: 'login', component: LoginComponent },
+        { path: 'signin', component: SigninComponent },
+        { path: 'recover', component: RecoverPasswordComponent }
       ]
     },
   
     {
-      path: '**', redirectTo: '/mainPages/home', pathMatch: 'full'
+      path: '**', redirectTo: '/mainPages/main', pathMatch: 'full'
     },
   ];
   
