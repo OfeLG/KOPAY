@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MyPackagesComponent } from './my-packages/my-packages.component';
+import { ProductRegistrationComponent } from './product-registration/product-registration.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,13 @@ const routes: Routes = [
       path: '', component: MyPackagesComponent,
       children: [
         { path: 'myPackages', component: MyPackagesComponent },
+      ]
+    },
+
+    {
+      path: '', component: ProductRegistrationComponent,
+      children: [
+        { path: 'productRegistration', component: ProductRegistrationComponent },
       ]
     },
   

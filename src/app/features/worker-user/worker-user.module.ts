@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MyPackagesComponent } from './my-packages/my-packages.component';
 import { WorkerUserRoutingModule } from './worker-user-routing.module';
 import { SharedModule } from 'src/app/shared/components/shared.module';
+import { ProductRegistrationComponent } from './product-registration/product-registration.component';
 
 
 
@@ -10,7 +11,8 @@ import { SharedModule } from 'src/app/shared/components/shared.module';
 
 @NgModule({
   declarations: [
-    MyPackagesComponent
+    MyPackagesComponent,
+    ProductRegistrationComponent
   ],
   imports: [
     CommonModule,

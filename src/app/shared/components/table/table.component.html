@@ -1,0 +1,40 @@
+
+<div class="div_table">
+    <table>
+        <thead>
+          <tr>
+            <th>N° Paquete</th>
+            <th>Fecha</th>
+            <th>Cant</th>
+            <th>Acumulado</th>
+            <th>Pagos</th>
+          </tr>
+        </thead>
+    </table>
+    <div class="div_data_table">
+      <table>
+        <tbody>
+          <tr *ngFor="let item of data; let i = index">
+            <td>{{ item.id }}</td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.product_quantity }}</td>
+            <td>{{ item.cumulative_total }}</td>
+            <td>
+              <div *ngIf="type_user === 'worker'" class="class_worker_status" [ngStyle]="{'background': (item.state == 'Pendiente' ? 'rgb(223, 221, 221)' : (item.state == 'Completado' ? '#2DD1DF' : '#000B49'))}">
+                <p [ngStyle]="{'color': (item.state == 'Pago' ? 'white' :  '#000B49')}">{{ item.state }}</p>
+              </div>
+             <div *ngIf="type_user === 'admin'" class="class_admin_status">
+                <app-select [select_type]="item.state" [options]="options_array" [selectedValue]="item.state"></app-select>
+             </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+
+<!-- <p [ngStyle]="{'color': (item.state == 'Pago' ? 'white' :  '#000B49')}">
+  {{ item.state }}
+  <i class="fa fa-chevron-down"></i>
+</p> -->
