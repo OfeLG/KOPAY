@@ -1,25 +1,27 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss']
 })
-export class SelectComponent {
+export class SelectComponent implements OnInit{
   @Input() selectedValue!: string;
   @Input() select_type!: String;
   @Input() options: string[] = [];
+  @Output() send_option = new EventEmitter<any>();
 
   showOptions: boolean = false;
+  public call: string = ""
 
   constructor(){}
 
   ngOnInit() {
-    if(this.selectedValue!='Producto' && this.selectedValue!='Paquete' && this.selectedValue!='Filtrar'){
-      if (!this.options.includes(this.selectedValue)) {
-        this.selectedValue = "Pendiente";
-        this.select_type = "Pendiente";
-      }
+    console.log("EL ARRAY DEL SELECT ES: "+ this.options)
+    if (this.selectedValue=='Producto'){
+      this.call = "name";
+    }else if (this.selectedValue=='Paquete'){
+      this.call = "id_package";
     }
   }
 
@@ -27,8 +29,17 @@ export class SelectComponent {
     this.showOptions = !this.showOptions;
   }
 
-  selectOption(option: string) {
-    this.selectedValue = option;
-    this.showOptions = false;
+  getOptionValue(option: any, change: boolean): string {
+    if(this.select_type != "package"){
+      this.selectedValue = option[this.call];
+    }else{
+      this.selectedValue = option;
+    }
+
+    if (change){
+      this.send_option.emit(this.selectedValue);
+      this.toggleOptions();
+    }
+    return this.selectedValue;
   }
 }

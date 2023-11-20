@@ -55,12 +55,16 @@
                 }
             }
         }
-        // hr{
-        //     margin: 10px;
-        // }
-        strong{
-            font-size: 15px;
-            cursor: pointer;
+        hr{
+            margin-bottom: 15px;
+        }
+        .options_p{
+            text-decoration: none;
+            color: $dark-blue;
+            strong{
+                font-size: 15px;
+                cursor: pointer;
+            }
         }
     }
     .div_options{

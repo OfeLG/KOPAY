@@ -14,23 +14,12 @@
         height: 100%;
         background: white;
         .div_header{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 5px 30px;
+            padding: 7px 30px; //5px 30px;
             background: white;
             color: $dark-blue;
             border-bottom: 2px solid $light-gray-letter;
-            h2{
+            h3{
                 margin: 13px 0px;
-            }
-            .buttons{
-                width: 15%;
-                padding: 8px !important;
-                font-weight: bold;
-                &:active {
-                    background: white;
-                }
             }
         }
         .div_filter_search{
@@ -39,9 +28,12 @@
             justify-content: space-between;
             margin-top: 25px;
             padding: 5px 30px;
+            .div_filter{
+                width: 20%;
+            }
             .datePicker{
-                width: 35%;
-                padding: 8px;
+                // width: 35%;
+                padding: 9px;
                 border: 1px solid $dark-blue;
                 border-radius: 6px;
                 font-family: "Nunito Sans";
@@ -49,30 +41,15 @@
                 font-size: 16px;
                 color: $dark-blue;
                 background: $light-gray-letter;
+                cursor: pointer;
                 &:focus {
                     background: white;
                     outline: none;
                 }
             }
-            .div_search{
-                display: flex;
-                align-items: center;
-                width: 60%;
-                padding: 0px 8px;
-                border-radius: 6px;
-                box-sizing: border-box;
-                border: 1px solid $gray-letter;
-                img{
-                    width: 22px;
-                    height: 22px;
-                }
-                .input_style{
-                    width: 95%;
-                    padding: 12px !important;
-                    border: 0px;
-                }
+            .div_main_search{
+                position: relative;
             }
-
         }
         .div_blocks{
             display: flex;
@@ -113,13 +90,26 @@
                 }
             }
         }
-        .div_table_options{
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            margin-top: 25px;
+        .div_table_options_worker{
+            width: 100%;
             button{
                 width: 19%;
+            }
+        }
+        .div_table_options_admin{
+            width: 45%;
+            button{
+                width: 37%;
+            }
+        }
+        .div_table_options_worker, .div_table_options_admin{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+            padding: 0px 30px;
+            margin-top: 25px;
+            button{
                 color: $dark-blue;
                 font-weight: bold;
                 padding-bottom: 5px;
@@ -142,62 +132,4 @@
     }
 }
 
-
-
-//________________________________
-
-// .div_table{
-//     width: 100%;
-//     max-height: 275px;
-//     .div_data_table{
-//         width: 100%;
-//         max-height: 225px; 
-//         overflow-y: auto;
-//         &::-webkit-scrollbar {
-//             width: 8px; /* Ancho del scroll vertical */
-//             height: 12px; /* Alto del scroll horizontal */
-//         }
-//         &::-webkit-scrollbar-thumb {
-//             background: $light-gray-letter; /* Color del "dedo" del scroll */
-//             border-radius: 2px; /* Radio del "dedo" del scroll */
-//         }
-//         &::-webkit-scrollbar-track {
-//             background: none; /* Color de fondo del área del scroll */
-//         }
-//         tr{
-//             border-bottom: 1px solid red; 
-//         }
-//     }
-//     table{
-//         width: 100%;
-//         thead{
-//             tr{
-//                 height: 30px;
-//                 text-align: left;
-//                 background: $light-gray-letter;
-//             }
-//         }
-//         th, td{
-//             width: 20%;
-//             height: 40px;
-//             padding-left: 20px; //OJO, PUEDO QUITARLO
-//             font-size: 14px;
-//         }
-//         tbody tr{
-//             height: 30px;
-//             // border-bottom: 1px solid red; 
-//             div{
-//                 text-align: center;
-//                 width: 120px;
-//                 padding: 5px;
-//                 border-radius: 10px;
-//                 background: rgb(147, 66, 228);
-//                 p{
-//                     margin: 0px;
-//                     font-size: 14px;
-//                 }
-//             }
-//         }
-//     }
-// }
 

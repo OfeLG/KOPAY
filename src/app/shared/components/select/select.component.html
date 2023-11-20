@@ -1,12 +1,13 @@
 <div class="custom_select">
-    <div class="selected_option" (click)="toggleOptions()" [ngClass]="{'class_paid': select_type == 'Pago', 'class_earring': select_type== 'Pendiente', 'class_filter': select_type == 'Filtro',  'class_form': select_type == 'form', 'show_true': showOptions}">
-      <p>{{ selectedValue }}</p>
-      <i class="fa fa-chevron-down" *ngIf="!showOptions"></i>
-      <i class="fa fa-chevron-up" *ngIf="showOptions"></i>
-    </div>
-    <ul class="options" *ngIf="showOptions" [ngClass]="{'class_paid': select_type == 'Pago', 'class_earring': select_type== 'Pendiente', 'class_filter': select_type == 'filter',  'class_form': select_type == 'form'}">
-      <li *ngFor="let option of options" (click)="selectOption(option)">
-        {{ option }}
-      </li>
-    </ul>
+  <div class="selected_option" (click)="toggleOptions()" [ngClass]="{'class_paid': selectedValue == 'Closed', 'class_completed': selectedValue == 'Completed', 'class_filter': select_type == 'filter', 'class_form': select_type == 'form', 'show_true': showOptions, 'class_detail': select_type == 'Detail', 'class_package': select_type == 'package', 'class_employee': select_type == 'employee'}">
+    <div>{{selectedValue}}</div>
+    <i class="fa fa-chevron-down" *ngIf="!showOptions"></i>
+    <i class="fa fa-chevron-up" *ngIf="showOptions"></i>
+  </div>
+  <ul class="options" *ngIf="showOptions" [ngClass]="{'class_paid': selectedValue == 'Closed', 'class_completed': selectedValue == 'Completed', 'class_filter': select_type == 'filter', 'class_form': select_type == 'form', 'class_detail': select_type == 'Detail', 'class_package': select_type == 'package', 'class_employee': select_type == 'employee'}">
+    <li *ngFor="let option of options" (click)="getOptionValue(option, true)">
+      {{getOptionValue(option, false)}}
+    </li>
+  </ul>
 </div>
+

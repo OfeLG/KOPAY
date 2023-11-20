@@ -1,0 +1,37 @@
+<div class="div_setting">
+    <app-nav-bar (send_navbar_route)="navigate($event)"></app-nav-bar>
+    <div class="div_body">
+        <div class="div_header">
+            <h3>CONFIGURACIÓN</h3>
+        </div>
+        <div class="div_form">
+            <form #myForm="ngForm">
+                <div class="div_grid">
+                    <div class="div_fields">
+                        <input class="input_style" type="text" [value]="data.id_number" [disabled]="data != 'admin'">
+                    </div>
+                    <div class="div_fields">
+                        <input class="input_style" type="text" [value]="data.role"  [disabled]="true">
+                    </div>
+                    <div class="div_fields">
+                        <input class="input_style" type="text" [(ngModel)]="data.name" name="name">
+                    </div>
+                    <div class="div_fields">
+                        <input class="input_style" type="text" [value]="data.email">
+                    </div>
+                </div>
+                <p>En este apartado, te ofrecemos la posibilidad de editar tu información personal, como tu nombre y correo electrónico asociado a tu cuenta en Kopay.</p>
+                <button type="button" (click)="update()" [disabled]="!myForm.dirty" class="buttons button_dark_blue">Editar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" [ngClass]="{'show': var_modal}">
+    <div class="modal_content" [ngClass]="{'show': var_modal}">
+        <div class="content">
+            <h2>¡Se ha actualizado correctamente su cuenta!</h2>
+            <button (click)="this.modalActions();" class="buttons button_dark_blue">OK</button>
+        </div>
+    </div>
+</div>

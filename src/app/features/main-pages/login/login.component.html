@@ -1,12 +1,12 @@
 <div class="div_login">
     <div class="content">
         <div class="div_logo_name">
-            <img src="../../../../assets/logo_kopay.png" alt="Logo de KOPAY" (click)="navigate('main')">
+            <img src="../../../../assets/logo_kopay.png" alt="Logo de KOPAY" (click)="navigate('mainPages/main')">
             <h1>KOPAY</h1>
         </div>
-        <input type="email" placeholder="Correo electrónico" class="input_style">
-        <input type="password" placeholder="Contraseña" class="input_style">
-        <button class="buttons button_dark_blue">Iniciar sesión</button>
+        <input type="email" placeholder="Correo electrónico" class="input_style" [(ngModel)]="user.email">
+        <input type="password" placeholder="Contraseña" class="input_style" [(ngModel)]="user.password">
+        <button class="buttons button_dark_blue" (click)="validate_login(user)">Iniciar sesión</button>
         <a href="mainPages/recover">¿Olvidaste tu contraseña?</a>
     </div>
 </div>

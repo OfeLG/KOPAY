@@ -1,0 +1,51 @@
+<div class="div_my_packages">
+    <app-nav-bar (send_navbar_route)="navigate($event, true)"></app-nav-bar>
+    <div class="div_body">
+        <div class="div_header">
+            <h3>MIS PAQUETES</h3>
+        </div>
+        <div class="div_filter_search">
+            <div class="div_filter" *ngIf="app_service.data_user.role=='admin'">
+                <app-select [select_type]="'filter'" [options]="options_array" [selectedValue]="'Filtrar'"></app-select>
+            </div>
+            <input type="date" class="datePicker" [(ngModel)]="selected_date" (change)="onDateChange()"[ngStyle]="{ 'width.%': app_service.data_user.role=='admin' ? 25 : 35}">
+            <div class="div_main_search" [ngStyle]="{ 'width.%': app_service.data_user.role=='admin' ? 48 : 60}">
+                <app-search  [type_search]="'package'" [array_search]="array_filtered_packets" (searchResult)="receiveSearchResults($event)"></app-search>
+            </div>
+        </div>
+        <div class="div_blocks">
+            <div class="block">
+                <div class="div_logo" style="background: #011066;">
+                    <i class="fa fa-cube" style="color: #30DEEC;"></i>
+                </div>
+                <div class="div_data">
+                    <p>Paquetes</p>
+                    <h3>N° {{total_package.quantity}}</h3>
+                </div>
+            </div>
+            <div class="block">
+                <div class="div_logo" style="background: #30DEEC;">
+                    <i class="fa fa-money-bill" style="color: #011066;"></i>
+                </div>
+                <div class="div_data">
+                    <p>Acumulado</p>
+                    <h3>$ {{total_package.total_money}}</h3>
+                </div>
+            </div>
+        </div>
+        <!-- [ngStyle]="{ 'width.%': app_service.data_user.role=='admin' ? 25 : 35}" -->
+        <div class="div_table_options_worker" *ngIf="app_service.data_user.role!='admin'">
+            <button (click)="changeTableState('Pending')" [ngClass]="{'border_style': table_status=='Pending'}">Pendientes</button>
+            <button (click)="changeTableState('all')" [ngClass]="{'border_style': table_status=='all'}">Completados</button>
+            <button (click)="changeTableState('Completed')" [ngClass]="{'border_style': table_status=='Completed'}">Por cobrar</button>
+            <button (click)="changeTableState('Closed')" [ngClass]="{'border_style': table_status=='Closed'}">Pagos</button>
+        </div>
+        <div class="div_table_options_admin" *ngIf="app_service.data_user.role=='admin'">
+            <button (click)="changeTableState('Completed')" [ngClass]="{'border_style': table_status=='Completed'}">Completados</button>
+            <button (click)="changeTableState('Closed')" [ngClass]="{'border_style': table_status=='Closed'}">Pagos</button>
+        </div>
+        <div class="div_table_main">
+            <app-table [data]="array_filtered_packets" [type_table]="'package'"></app-table>
+        </div>
+    </div>
+</div>

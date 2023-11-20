@@ -1,8 +1,10 @@
+<!-- PAQUETES -->
 
-<div class="div_table">
-    <table>
+<div class="div_table div_table_package" *ngIf="type_table=='package'">
+    <table class="table_package">
         <thead>
           <tr>
+            <th *ngIf="type_user == 'admin'">N° Cliente</th>
             <th>N° Paquete</th>
             <th>Fecha</th>
             <th>Cant</th>
@@ -12,20 +14,21 @@
         </thead>
     </table>
     <div class="div_data_table">
-      <table>
+      <table class="table_package">
         <tbody>
           <tr *ngFor="let item of data; let i = index">
-            <td>{{ item.id }}</td>
-            <td>{{ item.date }}</td>
+            <td *ngIf="type_user == 'admin'">{{ item.id_user }}</td>
+            <td>{{ item.id_package }}</td>
+            <td>{{ item.date.slice(0, 16) }}</td>
             <td>{{ item.product_quantity }}</td>
             <td>{{ item.cumulative_total }}</td>
             <td>
-              <div *ngIf="type_user === 'worker'" class="class_worker_status" [ngStyle]="{'background': (item.state == 'Pendiente' ? 'rgb(223, 221, 221)' : (item.state == 'Completado' ? '#2DD1DF' : '#000B49'))}">
-                <p [ngStyle]="{'color': (item.state == 'Pago' ? 'white' :  '#000B49')}">{{ item.state }}</p>
+              <div *ngIf="type_user != 'admin' || item.state!='Completed'" class="class_worker_status" [ngStyle]="{'background': (item.state == 'Pending' ? 'rgb(223, 221, 221)' : (item.state == 'Completed' ? '#2DD1DF' : '#000B49'))}">
+                <p [ngStyle]="{'color': (item.state == 'Closed' ? 'white' :  '#000B49')}">{{ item.state }}</p>
               </div>
-             <div *ngIf="type_user === 'admin'" class="class_admin_status">
-                <app-select [select_type]="item.state" [options]="options_array" [selectedValue]="item.state"></app-select>
-             </div>
+              <div *ngIf="type_user == 'admin' && item.state=='Completed'" class="class_admin_status">
+                <app-select [select_type]="type_table" [options]="state_options" [selectedValue]="item.state"></app-select>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -33,8 +36,85 @@
     </div>
 </div>
 
+<!-- PRODUCTO - PAQUETE DETALLE -->
 
-<!-- <p [ngStyle]="{'color': (item.state == 'Pago' ? 'white' :  '#000B49')}">
-  {{ item.state }}
-  <i class="fa fa-chevron-down"></i>
-</p> -->
+<div class="div_table" *ngIf="type_table=='product'">
+  <table class="table_product">
+      <thead>
+        <tr>
+          <th>N° Producto</th>
+          <th>Nombre</th>
+          <th>Fecha y Hora</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+  </table>
+  <div class="div_data_table">
+    <table class="table_product">
+      <tbody>
+        <tr *ngFor="let item of data; let i = index">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.date_hour }}</td>
+          <td>{{ item.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PRODUCTO - AÑADIR PRODUCTO -->
+
+<div class="div_table" *ngIf="type_table=='add_product'">
+  <table class="table_add_product">
+      <thead>
+        <tr>
+          <th>N° Producto</th>
+          <th>Nombre</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+  </table>
+  <div class="div_data_table">
+    <table class="table_add_product">
+      <tbody>
+        <tr *ngFor="let item of data; let i = index">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- AÑADIR EMPLEADOS -->
+
+<div class="div_table" *ngIf="type_table=='employee'">
+  <table class="table_employee">
+      <thead>
+        <tr>
+          <th>N° Identificación</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Rol</th>
+        </tr>
+      </thead>
+  </table>
+  <div class="div_data_table">
+    <table class="table_employee">
+      <tbody>
+        <tr *ngFor="let item of data; let i = index">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.mail }}</td>
+          <td>
+           <div *ngIf="type_user === 'admin'" class="class_admin_status">
+              <app-select [select_type]="type_table" [options]="role_options" [selectedValue]="item.role"></app-select>
+           </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

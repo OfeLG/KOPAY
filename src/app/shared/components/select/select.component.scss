@@ -11,52 +11,97 @@
     justify-content: space-between;
     border-radius: 6px;
     cursor: pointer;
-    p, i{
-        margin: 0px;
-        padding: 5px 7px;
-    }
 } 
 .options {
-    display: block; /* Cambiar display a block */
+    display: block; 
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     z-index: 999;
+    Max-height: 148px; // ajusta este valor según sea necesario
+    overflow-y: auto; // agrega una barra de desplazamiento vertical si es necesario
     padding: 0;
     margin: 0;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
-    // border-top: none !important;
     list-style: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     li{
         border-top: 0.3px solid $white-change;
-        padding: 5px 7px;
         cursor: pointer;
+    }
+    li:last-child{
+        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: 6px;
+    }
+    &::-webkit-scrollbar {
+        width: 0px; // Ancho de la barra de desplazamiento
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent; // Color del pulgar (thumb)
     }
 }
 
-//Dependiendo del tipo de select, este cambiará sus colores
-.class_paid{ // PAGO
+//Dependiendo del tipo de select, este cambiará sus colores y la altura
+.class_paid{ // PAGO - CAMBIA EL COLOR
     background: $dark-blue;
     color: $light-gray-letter;
     li{
         border-top-color: $dark-blue-change;
     }
+    li:hover{
+        background: $dark-blue-change;
+    }
 }
-.class_earring, .class_filter{ // PENDIENTE Y FILTRO
+.class_completed{
+    background: $light-blue;
+    color: $dark-blue;
+    li{
+        border-top-color: $light-gray-letter;
+    }
+    li:hover{
+        background: $light-blue-change;
+    }
+}
+.class_filter, .class_employee{ // PENDIENTE Y FILTRO - CAMBIA EL COLOR
     background: $light-gray-letter;
     color: $dark-blue;
+    li:hover{
+        background: $light-gray-letter-change;
+    }
 }
-.class_form{ // FORMULARIO
+.class_package, .class_employee{  // PARA LAS TABLAS DEL ADMIN - CAMBIA LA ALTURA
+    div, i, li{
+        padding: 5px 7px;
+    }
+}
+.class_filter{ // PARA EL FILTRO DEL ADMIN - CAMBIA LA ALTURA
+    border: 1px solid $dark-blue;
+    div, i, li{
+        padding: 10px;
+    }
+}
+.class_form{ // FORMULARIO - CAMBIA EL COLOR Y LA ALTURA
     background: white;
     color: $dark-blue;
     border: 1px solid $dark-blue;
-    p, i, li{
+    li, i, div{
         padding: 13px;
     }
+    li:hover{
+        background: $white-change;
+    }
 }
+
+.class_detail{ // PARA EL DETAIL DEL ADMIN - CAMBIA LA ALTURA
+    font-weight: bold;
+    // border: 1px solid $gray-letter;
+    li, i, div{
+        padding: 8px 15px;
+    }
+}
+
 .show_true{
     border-radius: 6px 6px 0 0;
     border-bottom: none;

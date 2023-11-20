@@ -1,0 +1,5 @@
+<div class="div_search">
+    <img src="../../../../assets/search_icon.png" alt="Icono de buscar" [ngStyle]="input_status ? {'visibility': 'visible'}:{'visibility': 'hidden'}">
+    <input type="text" class="input_style" [(ngModel)]="search" (input)="searchElements()" placeholder="Buscar por Id..." (focus)="input_status=false" (blur)="input_status=true">
+</div>
+

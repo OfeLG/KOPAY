@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { MainPagesRoutingModule } from '../main-pages/main-pages-routing.module';
 import { MainComponent } from './main/main.component';
@@ -22,6 +23,7 @@ import { RecoverPasswordComponent } from './recover-password/recover-password.co
   imports: [
     CommonModule,
     MainPagesRoutingModule,
+    FormsModule,
     // SharedModule,
   ]
 })

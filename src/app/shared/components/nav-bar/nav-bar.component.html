@@ -1,6 +1,6 @@
 <!-- PARA WORKER -->
 
-<div class="div_nav_bar" *ngIf="type_user=='worker'">
+<div class="div_nav_bar" *ngIf="data.role!='admin'">
     <div class="div_logo_name">
         <img src="../../../../assets/logo_kopay_2.png" alt="Logo KOPAY">
         <h2>KOPAY</h2>
@@ -14,7 +14,7 @@
             </div>
         </div>
         <hr>
-        <p><i class="fa fa-gear"></i><strong>Configuración</strong></p>
+        <p (click)="sendRoute('setting')" class="options_p"><i class="fa fa-gear"></i> <strong>Configuración</strong></p>
     </div>
     <div class="div_options">
         <ul>
@@ -23,13 +23,13 @@
         </ul>
     </div>
     <div class="div_Sign_off">
-        <a href="mainPages/recover"><i class="fa fa-store-slash"></i> Cerrar sesión</a>
+        <p class="options_p"><i class="fa fa-store-slash"></i> Cerrar sesión</p>
     </div>
 </div>
 
 <!-- PARA ADMIN -->
 
-<div class="div_nav_bar" *ngIf="type_user=='admin'">
+<div class="div_nav_bar" *ngIf="data.role=='admin'">
     <div class="div_logo_name">
         <img src="../../../../assets/logo_kopay_2.png" alt="Logo KOPAY">
         <h2>KOPAY</h2>
@@ -43,16 +43,16 @@
             </div>
         </div>
         <hr>
-        <p><i class="fa fa-gear"></i><strong>Configuración</strong></p>
+        <p class="options_p" (click)="sendRoute('setting')"><i class="fa fa-gear"></i> <strong>Configuración</strong></p>
     </div>
     <div class="div_options">
         <ul>
             <li (click)="sendRoute('myPackages')"><i class="fa fa-wallet"></i> Movimientos</li>
-            <li (click)="sendRoute('productRegistration')"><i class="fa fa-cubes"></i> Productos</li>
-            <li><i class="fa fa-user-nurse"></i> Empleados</li>
+            <li (click)="sendRoute('productCreation')"><i class="fa fa-cubes"></i> Productos</li>
+            <li (click)="sendRoute('employeeRegistration')"><i class="fa fa-user-nurse"></i> Empleados</li>
         </ul>
     </div>
     <div class="div_Sign_off">
-        <a href="mainPages/recover"><i class="fa fa-store-slash"></i> Cerrar sesión</a>
+        <p class="options_p"><i class="fa fa-store-slash"></i> Cerrar sesión</p>
     </div>
 </div>

@@ -1,0 +1,42 @@
+<div class="div_product_registration">
+    <app-nav-bar (send_navbar_route)="navigate($event)"></app-nav-bar>
+    <div class="div_body">
+        <div class="div_header">
+            <h3>REGISTRAR PRODUCTOS</h3>
+        </div>
+        <div class="div_form">
+            <form>
+                <div class="div_grid">
+                    <div class="div_fields">
+                        <app-select [select_type]="'form'" [options]="product_array" [selectedValue]="'Producto'" (send_option)="updateInput($event, 'product')"></app-select>
+                    </div>
+                    <div class="div_fields">
+                        <input class="input_style" type="text" placeholder="ID Producto" [disabled]="true" [value]="selected_product.id ?? ''">
+                    </div>
+                    <div class="div_fields">
+                        <input class="input_style" type="text" placeholder="Valor" [disabled]="true" [value]="selected_product.price ?? ''">
+                    </div>
+                    <div class="div_fields">
+                        <app-select [select_type]="'form'" [options]="package_array" [selectedValue]="'Paquete'" (send_option)="updateInput($event, 'package')"></app-select>
+                    </div>
+                </div>
+                <p>En esta sección, te brindamos la oportunidad de registrar individualmente cada uno de los productos que produces diariamente. Es importante tener en cuenta que cada producto debe ser asociado a un paquete existente con estado 'pendiente'. De esta manera, podrás gestionar eficazmente tus producciones y asegurarte de que todo esté en orden antes de su envío.</p>
+                <button type="button" class="buttons button_dark_blue" (click)="register()">Registrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" [ngClass]="{'show': var_modal}">
+    <div class="modal_content" [ngClass]="{'show': var_modal}">
+        <div class="content">
+            <h2>¡Se ha registrado un nuevo producto!</h2>
+            <hr>
+            <p>Su producto fue registrado en su paquete N° {{selected_package}}, donde actualmente tiene un acumulado de {{data_register.product_quantity}} productos y un total de $ {{data_register.cumulative_total}}.</p>
+            <button (click)="this.modalActions();" class="buttons button_dark_blue">OK</button>
+        </div>
+    </div>
+</div>
+
+

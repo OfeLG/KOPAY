@@ -1,0 +1,38 @@
+<div class="div_package_detail">
+    <app-nav-bar (send_navbar_route)="navigate($event)"></app-nav-bar>
+    <div class="div_body">
+        <div class="div_header">
+            <h3>PAQUETE: 103832</h3>
+            <button class="buttons button_dark_blue" *ngIf="type_user!='admin'">Imprimir</button>
+            <div *ngIf="type_user=='admin'">
+                <!-- El valor cambia segun el item de estado que se le envie -->
+                <app-select [select_type]="'Detail'" [options]="options_array" [selectedValue]="'pago'"></app-select> 
+            </div>
+        </div>
+        <div class="package_data_worker" *ngIf="type_user!='admin'">
+            <p><strong>Estado:</strong> Completado</p>
+            <p><strong>Fecha:</strong> 30/05/23</p>
+        </div>
+        <div class="package_data_admin" *ngIf="type_user=='admin'">
+            <p><strong>Identificación:</strong> 1002331</p>
+            <p><strong>Nombre:</strong> Ofelia Londoño</p>
+            <p><strong>Fecha:</strong> 30/06/23</p>
+            <p><strong>Rol:</strong> Cortador</p>
+        </div>
+        <div class="div_table_main">
+            <app-table [data]="array_product" [type_table]="'product'"></app-table>
+        </div>
+        <div class="div_total">
+           <div class="div_table_total">
+                <table>
+                    <tfoot>
+                        <tr>
+                            <td>Total:</td>
+                            <td>$ 300.000</td>
+                        </tr>
+                    </tfoot>
+                </table>
+           </div>
+        </div>
+    </div>
+</div>
