@@ -1,6 +1,6 @@
-<div #contentPDF class="div_package_detail" *ngIf="detail_data">
+<div class="div_package_detail" *ngIf="detail_data">
     <app-nav-bar [user]="app_service.data_user" (send_navbar_route)="navigate($event)"></app-nav-bar>
-    <div class="div_body">
+    <div class="div_body"  #contenidoPDF>
         <div class="div_header">
             <h3>PAQUETE: {{detail_data.id_package}}</h3>
             <button class="buttons button_dark_blue" *ngIf="type_user!='admin'" (click)="generatePDF()">Imprimir</button>

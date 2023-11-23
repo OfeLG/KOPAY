@@ -1,14 +1,14 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss']
 })
-export class SelectComponent implements OnInit{
+export class SelectComponent implements OnChanges{
   @Input() selectedValue!: string;
   @Input() select_type!: String;
-  @Input() options: string[] = [];
+  @Input() options: any = [];
   @Output() send_option = new EventEmitter<any>();
 
   showOptions: boolean = false;
@@ -17,7 +17,7 @@ export class SelectComponent implements OnInit{
 
   constructor(){}
 
-  ngOnInit() {
+  ngOnChanges() {
     if (this.selectedValue=='Producto'){
       this.call = "name";
     }else if (this.selectedValue=='Paquete'){
@@ -50,7 +50,7 @@ export class SelectComponent implements OnInit{
 
   emitOptionValue(option: any, event: Event): void {
     this.selectedValue = this.getOptionValue(option);
-    this.send_option.emit(this.selectedValue);
+    this.send_option.emit(option);
     this.toggleOptions();
     this.removeOptions();
     event.stopPropagation();

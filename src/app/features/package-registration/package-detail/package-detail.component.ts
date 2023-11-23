@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
-
-import { jsPDF } from 'jspdf';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+// import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-package-detail',
@@ -10,6 +11,7 @@ import { jsPDF } from 'jspdf';
   styleUrls: ['./package-detail.component.scss']
 })
 export class PackageDetailComponent implements OnInit {
+  @ViewChild('contenidoPDF', { static: false }) contenidoPDF!: ElementRef;
   public type_user: string = "";
   options_array: string[] = ["Closed"];
   public detail_data: any;
@@ -52,15 +54,25 @@ export class PackageDetailComponent implements OnInit {
 
   generatePDF() {
     const pdf = new jsPDF(); // Instancia de jsPDF
-  
-    // Agrega contenido al PDF (puedes personalizar esto según tus datos)
-    pdf.text('Hola, este es mi PDF generado desde Angular', 10, 10);
-  
-    // Guarda el PDF (puedes ajustar el nombre del archivo según tus necesidades)
-    pdf.save('mi_archivo.pdf');
+
+    // Captura el HTML del componente como una imagen (canvas)
+    html2canvas(this.contenidoPDF.nativeElement).then((canvas) => {
+      // Convierte el canvas a imagen (formato PNG por defecto)
+      const imageData = canvas.toDataURL('image/png');
+
+      // Ajusta estos valores según tus necesidades
+      const x = 10;
+      const y = 10;
+      const w = pdf.internal.pageSize.getWidth() - 20; // Ancho de la imagen en el PDF
+      const h = (canvas.height * w) / canvas.width; // Calcula la altura proporcional
+
+      // Agrega la imagen al PDF
+      pdf.addImage(imageData, 'PNG', x, y, w, h);
+
+      // Guarda el PDF (puedes ajustar el nombre del archivo según tus necesidades)
+      pdf.save('mi_archivo.pdf');
+    });
   }
-
+  
 }
-
-
 

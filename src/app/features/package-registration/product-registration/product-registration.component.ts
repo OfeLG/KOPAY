@@ -26,7 +26,8 @@ export class ProductRegistrationComponent implements OnInit{
   
   ngOnInit() {
     this.app_service.getProduct().subscribe(
-      (response: any) => this.product_array = response.products,
+      (response: any) => {this.product_array = [...response.products];
+      },
       (error) => console.error("Error al obtener los productos:", error)
     );
   
@@ -55,7 +56,7 @@ export class ProductRegistrationComponent implements OnInit{
 
   updateInput(option: any, type: string){
     if (type == "product") {
-      this.selected_product = {...option};
+      this.selected_product = option;
     }else if (type == "package"){
       this.selected_package = option.id_package;
     }

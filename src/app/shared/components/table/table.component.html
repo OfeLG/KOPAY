@@ -27,7 +27,7 @@
                 <p [ngStyle]="{'color': (item.state == 'Closed' ? 'white' :  '#000B49')}">{{ item.state }}</p>
               </div>
               <div *ngIf="type_user == 'admin' && item.state=='Completed'" class="class_admin_status">
-                <app-select [select_type]="type_table" [options]="state_options" [selectedValue]="item.state" (send_option)="payment($event)"></app-select>
+                <app-select [select_type]="type_table" [options]="state_options" [selectedValue]="item.state" (send_option)="payment(item.id_number, item.id_package, $event)"></app-select>
               </div>
             </td>
           </tr>

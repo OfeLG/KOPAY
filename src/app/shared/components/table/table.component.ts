@@ -26,8 +26,15 @@ export class TableComponent {
     this.send_detail_route.emit('packageDetail');
   }
 
-  payment(new_state: string){
-    console.log("Realizar el pago")
+  payment(id_employee: string, id_package:string, event: string){
+    this.app_service.postPay(id_employee, id_package).subscribe(
+      (response) => {
+        console.log("Se realizó el pago: "+ response)
+      },
+      (error) => {
+        console.error('Error al realizar pago:', error);
+      }
+    );
     // this.data = this.data.filter((item_package: { state: String; }) => item_package.state == 'Completed');
   }
 

@@ -100,13 +100,13 @@ export class AppService {
     return this.http.post(url, employee, this.getHeaders());
   }
 
-  // postPay(id: string, name: string): Observable<any> {
-  //   let url = this.api_domain + "/payment/create";
-  //   const product = {
-  //     user_id_number: id,
-  //     product_name: name
-  //   };
-  //   return this.http.post(url, product, this.getHeaders());
-  // }
+  postPay(id_employee: string, id_package: string): Observable<any> {
+    let url = this.api_domain + "/payment/create";
+    const pay = {
+      user_id_number: id_employee,
+      id_pck: id_package
+    };
+    return this.http.post(url, pay, this.getHeaders());
+  }
 }
 
