@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-package-registration',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WorkerUserComponent implements OnInit {
 
-  constructor() { }
+  constructor(public app_service: AppService) { }
 
   ngOnInit(): void {
+    this.app_service.getUserDataFromLocalStorage();
   }
 
 }

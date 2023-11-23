@@ -66,7 +66,7 @@ export class MyPackagesComponent implements OnInit {
     let array = [];
     if(filter_type == "state"){
       if (value == "all") {
-        array = this.packages_array.filter((item_package: { state: String; }) => item_package.state == 'Closed' || item_package.state == 'Completed');
+        array = this.packages_array.filter((item_package: { state: String; }) => item_package.state == 'Pending' || item_package.state == 'Completed');
       } else {
         array = this.packages_array.filter((item_package: { state: String; }) => item_package.state == value);
       }

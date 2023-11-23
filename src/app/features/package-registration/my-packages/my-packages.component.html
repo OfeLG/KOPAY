@@ -36,8 +36,8 @@
         <!-- [ngStyle]="{ 'width.%': app_service.data_user.role=='admin' ? 25 : 35}" -->
         <div class="div_table_options_worker" *ngIf="app_service.data_user.role!='admin'">
             <button (click)="changeTableState('Pending', 'state')" [ngClass]="{'border_style': table_status=='Pending'}">Pendientes</button>
-            <button (click)="changeTableState('all', 'state')" [ngClass]="{'border_style': table_status=='all'}">Completados</button>
-            <button (click)="changeTableState('Completed', 'state')" [ngClass]="{'border_style': table_status=='Completed'}">Por cobrar</button>
+            <button (click)="changeTableState('Completed', 'state')" [ngClass]="{'border_style': table_status=='Completed'}">Completados</button>
+            <button (click)="changeTableState('all', 'state')" [ngClass]="{'border_style': table_status=='all'}">Por cobrar</button>
             <button (click)="changeTableState('Closed', 'state')" [ngClass]="{'border_style': table_status=='Closed'}">Pagos</button>
         </div>
         <div class="div_table_options_admin" *ngIf="app_service.data_user.role=='admin'">

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class AppService {
 
   /** Token ID del usuario */
-  public token: string = '';
+  public token: any;
   public data_user: any;
   public id_detail = {
     id_number: "",
@@ -16,6 +16,20 @@ export class AppService {
   };
   public api_domain = "http://keiddyg.pythonanywhere.com";
   constructor(private http: HttpClient) { 
+    this.getUserDataFromLocalStorage();
+  }
+
+  getUserDataFromLocalStorage(): any {
+    this.token = localStorage.getItem('storedToken') || '';
+    const data_u = localStorage.getItem('storedUserData');
+    this.data_user = {...data_u ? JSON.parse(data_u) : {}};
+  }
+
+  logout(): void { // Lógica para cerrar sesión y limpiar el almacenamiento local
+    this.token = null;
+    this.data_user = null;
+    localStorage.removeItem('storedToken');
+    localStorage.removeItem('storedUserData');
   }
 
   private getHeaders(): any {

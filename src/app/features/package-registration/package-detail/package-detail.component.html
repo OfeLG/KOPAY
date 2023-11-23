@@ -5,9 +5,9 @@
             <h3>PAQUETE: {{detail_data.id_package}}</h3>
             <button class="buttons button_dark_blue" *ngIf="type_user!='admin'" (click)="generatePDF()">Imprimir</button>
             <div *ngIf="type_user=='admin'">
-                <button class="buttons button_dark_blue" *ngIf="detail_data.state =='Closed'">{{detail_data.state}}</button>
+                <button class="buttons button_dark_blue" *ngIf="detail_data.state =='Closed'" [disabled]="true">{{detail_data.state}}</button>
                 <!-- El valor cambia segun el item de estado que se le envie -->
-                <app-select *ngIf="detail_data.state =='Completed'" [select_type]="'Detail'" [options]="options_array" [selectedValue]="detail_data.state"></app-select> 
+                <app-select *ngIf="detail_data.state =='Completed'" [select_type]="'Detail'" [options]="options_array" [selectedValue]="detail_data.state" (send_option)="payment(data_employee.id_number, detail_data.id_package, $event)"></app-select> 
             </div>
         </div>
         <div class="package_data_worker" *ngIf="type_user!='admin'">

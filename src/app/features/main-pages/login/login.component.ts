@@ -27,8 +27,11 @@ export class LoginComponent {
     this.app_service.login(credentials).subscribe(
       (response: any) => {
         if (response && response.access_token && response.access_token.token) {
-          this.app_service.token = response.access_token.token;
-          this.app_service.data_user = jwt_decode.jwtDecode(this.app_service.token);
+          const token = response.access_token.token;
+          localStorage.setItem('storedToken', token);
+          const data = jwt_decode.jwtDecode(token);
+          localStorage.setItem('storedUserData', JSON.stringify(data));
+          this.app_service.getUserDataFromLocalStorage();
           console.log("MI INFO: ", this.app_service.data_user);
           this.navigate('packageRegistration/myPackages');
         } else {

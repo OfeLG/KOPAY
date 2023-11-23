@@ -20,5 +20,9 @@ export class NavBarComponent implements OnInit{
 
   sendRoute(navbar_route: string){
     this.send_navbar_route.emit(navbar_route);
+    if (navbar_route=="login"){
+      this.app_service.logout();
+      console.log("Saliooo");
+    }
   }
 }
