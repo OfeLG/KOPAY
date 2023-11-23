@@ -1,5 +1,6 @@
 @import 'src/app/styles/colors-letters.scss';
 @import 'src/app/styles/button_input.scss';
+@import '../../../styles/modal.scss';
 .div_signin{
     display: flex;
     flex-direction: column;
@@ -21,30 +22,47 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            h1{
+            h2{
                 margin: 7px;
                 color: $gray-letter;
             }
             img{
-                width: 90px;
-                height: 70px;
+                width: 80px;
+                height: 63px;
                 cursor: pointer;
             }
         }
         .div_logo_name, button, input{
-           margin-bottom: 20px;
+           margin-bottom: 15px;
         }
         .div_code{
             text-align: justify;
             height: fit-content;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            input{
+                margin: 0px;
+            }
             p{
+                margin: 0px;
+                margin: 7px, 0px;
                 color: $gray-letter;
             }
-            P, input{
-                margin: 0px;
-                margin-bottom: 7px;
-            }
+        }
+    }
+}
+
+//MODAL
+.modal .modal_content {
+    width: 40%;
+    .content{
+        text-align: center;
+        width: 100%;
+        h2, hr{
+            color: $gray-letter;
+        }
+        button{
+            width: 45%;
+            margin-top: 20px;
         }
     }
 }

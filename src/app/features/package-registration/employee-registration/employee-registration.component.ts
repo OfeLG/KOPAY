@@ -1,5 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-employee-registration',
@@ -7,64 +9,89 @@ import { Router } from '@angular/router';
   styleUrls: ['./employee-registration.component.scss']
 })
 export class EmployeeRegistrationComponent {
-  options_array_rol_employee: string[] = ["Cortador","Ensamblador", "Administrador"];
+  options_array_rol_employee: string[] = ["Cortador","Ensamblador", "Guarnecedor", "Admin"];
 
-  filteredData: Array<any>= []; // Guarda los datos filtrados de la busqueda
-  array_employeee: Array<any> = [
-    {
-      id: "121333",
-      name: "Ofelia Londoño",
-      mail: "Ofelialondonog@gmail.com",
-      role: "Cortador"
-    },
-    {
-      id: "100023",
-      name: "Natalia Castañeda",
-      mail: "NataliaCastañeda@gmail.com",
-      role: "Ensamblador"
-    },
-    {
-      id: "1013233",
-      name: "Valeria Isabelle",
-      mail: "ValeriaIsabellg@gmail.com",
-      role: "Guarnecedor"
-    },
-    {
-      id: "121333",
-      name: "Juana Valentina",
-      mail: "JuanaValentina@gmail.com",
-      role: "Cortador"
-    },
-    {
-      id: "1013233",
-      name: "Valeria Isabelle",
-      mail: "ValeriaIsabellg@gmail.com",
-      role: "Guarnecedor"
-    },
-    {
-      id: "121333",
-      name: "Ofelia Londoño",
-      mail: "Ofelialondonog@gmail.com",
-      role: "Cortador"
-    }
-  ]
+  public employee_array: Array<any> = [];
+  public filtered_employee: any = [];
 
   public open: string;
+  public var_modal: boolean;
+  public employee_email: string;
+  public employee_role: string;
+  public var_error: boolean;
 
-  constructor(private _router: Router){
+  constructor(
+    private _router: Router,
+    public app_service: AppService,
+    ){
     this.open = "";
+    this.var_modal = false;
+    this.var_error = false;
+    this.employee_email = "";
+    this.employee_role = "";
+  }
+
+  ngOnInit() {
+    this.app_service.getEmployee().subscribe(
+      (response) => {
+        this.employee_array = response.users;
+        this.filtered_employee = [...this.employee_array];
+      },
+      (error) => {
+        console.error("Error al obtener a los trabajadores:", error)
+      }
+    );
   }
 
   navigate(page: string){
-    this._router.navigate(['packageRegistration/'+page]);
+    if(page == "login"){
+      this._router.navigate(['mainPages/'+page]);
+      return;
+    }else{
+      this._router.navigate(['packageRegistration/'+page]);
+    }
   }
 
-  receiveSearchResults(results: any[]) {
-    this.filteredData = results; // Actualiza los datos filtrados
-    if (results.length == 0) {
-      this.filteredData = [...this.array_employeee]; // Restablecer a todos los registros si no hay coincidencias
+  modalActions(){
+    if(this.var_error && this.var_modal){
+      this.var_error = false;
     }
-    console.log('RESULTADOS DEL SEARCH AL PADRE:'+ this.filteredData);
+    this.var_modal = !this.var_modal;
+  }
+
+  selectRole(role: string){
+    this.employee_role = role;
+  }
+
+  receiveSearchResults(results: any) {
+    this.filtered_employee = [...results]; // Actualiza los datos filtrados
   }
   
+  create() {
+    if (this.employee_email!= "" && this.employee_role != "") { // Verificar si los datos estan llenos
+      this.app_service.createEmployee(this.employee_email, this.employee_role).subscribe(
+        (response) => {
+          this.filtered_employee.push (response.new_user);
+          this.modalActions();
+        },
+        (error) => {
+          this.var_error = true;
+          if (error instanceof HttpErrorResponse) { // Verificar el código de estado y la estructura del error
+            if (error.status === 400 && error.error.message === 'User exist') {
+              this.var_error = true;
+              this.modalActions();
+              return;
+            }
+          }
+          console.error('Error al crear el empleado:', error);
+        }
+        
+      );
+    }else{
+      console.log("No se ha creado el empleado, porque no se han agregado todos los datos requeridos");
+    }
+    this.employee_email = "";
+    this.employee_role = "";
+    this.open='';
+  }
 }

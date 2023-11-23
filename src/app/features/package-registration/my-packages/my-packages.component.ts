@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { Router } from '@angular/router';
 import { format, parseISO } from 'date-fns';
@@ -10,10 +10,12 @@ import { enUS } from 'date-fns/locale';
   styleUrls: ['./my-packages.component.scss']
 })
 export class MyPackagesComponent implements OnInit {
-  options_array: string[] = ["Cortador", "Guarnecesor", "Ensamblador"];
 
-  public array_data: any;
+  public role_options = ["cortador", "guarnecedor", "ensamblador"];
+  public packages_array: any;
   public array_filtered_packets: any;
+  public employee_array: Array<any> = [];
+
   public selected_date: string = "";
   public input_status: Boolean;
   public table_status: String;
@@ -37,28 +39,43 @@ export class MyPackagesComponent implements OnInit {
         if (response) {
           let state;
           if (type_user == "admin") {
-            this.array_data = response.packages;
+            this.packages_array = response.packages;
             state = "Completed";
           } else {
-            this.array_data = response.package;
+            this.packages_array = response.package;
             state = "Pending";
           }
-          this.changeTableState(state);
+          this.changeTableState(state, "state");
         }
       },
       (error) => {
         console.error("Error al obtener paquetes:", error);
       }
     );
+
+    if (type_user == "admin"){
+      this.app_service.getEmployee().subscribe(
+        (response: any) => this.employee_array = [...response.users], 
+        (error) => console.error("Error al obtener los empleados:", error)
+      );
+    }
   }
 
-  changeTableState(value: String) {
+  changeTableState(value: String, filter_type: string) {
     this.table_status = value;
-    let array;
-    if (value == "all") {
-      array = this.array_data.filter((data: { state: String; }) => data.state === 'Closed' || data.state === 'Completed');
-    } else {
-      array = this.array_data.filter((data: { state: String; }) => data.state === value);
+    let array = [];
+    if(filter_type == "state"){
+      if (value == "all") {
+        array = this.packages_array.filter((item_package: { state: String; }) => item_package.state == 'Closed' || item_package.state == 'Completed');
+      } else {
+        array = this.packages_array.filter((item_package: { state: String; }) => item_package.state == value);
+      }
+    }else if (filter_type == "role"){
+      let filter_users =  [...this.employee_array];
+      filter_users = this.employee_array.filter((user) => user.role == value);
+      array = this.packages_array.filter((item_package: { id_number: string; }) => { // Verificar si el usuario asociado al paquete está en la lista de users
+        return filter_users.some((item_user) => item_user.id_number.trim() == item_package.id_number.trim());
+      });
     }
     this.array_filtered_packets = [...array];
     this.total_package.total_money = this.array_filtered_packets.reduce((cumulative: number, data: any) => {
@@ -69,23 +86,25 @@ export class MyPackagesComponent implements OnInit {
     }, 0);
   }
 
-  navigate(page: string, type_login: boolean) {
-    if (type_login) {
-      this._router.navigate(['packageRegistration/' + page]);
-    } else {
-      this._router.navigate(['mainPages/' + page]);
-    }
-  }
-
-  onDateChange(): void {
-    const array = this.array_data.filter((data: { date: string; }) => this.formatSelectedDate(data.date, "dataBase") === this.formatSelectedDate(this.selected_date, "selected"));
-    if (array.length > 0) {
-      this.array_filtered_packets = [...array];
+  navigate(page: string){
+    if(page == "login"){
+      this._router.navigate(['mainPages/'+page]);
+      return;
+    }else{
+      this._router.navigate(['packageRegistration/'+page]);
     }
   }
 
   receiveSearchResults(results: any[]) {
     this.array_filtered_packets = [...results];
+    console.log("en el my-package estoy recibiendo: " + this.array_filtered_packets);
+  }
+
+  onDateChange(): void {
+    const array = this.packages_array.filter((data: { date: string; }) => this.formatSelectedDate(data.date, "dataBase") === this.formatSelectedDate(this.selected_date, "selected"));
+    if (array.length > 0) {
+      this.array_filtered_packets = [...array];
+    }
   }
 
   formatSelectedDate(date: string, format_type: string): string {
@@ -108,3 +127,5 @@ export class MyPackagesComponent implements OnInit {
     return format_date;
   }
 }
+
+//willianinsignares@gmail.com

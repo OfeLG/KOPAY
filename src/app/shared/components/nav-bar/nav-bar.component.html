@@ -1,16 +1,18 @@
 <!-- PARA WORKER -->
 
-<div class="div_nav_bar" *ngIf="data.role!='admin'">
+<div class="div_nav_bar" *ngIf="user.role!='admin'">
     <div class="div_logo_name">
         <img src="../../../../assets/logo_kopay_2.png" alt="Logo KOPAY">
         <h2>KOPAY</h2>
     </div>
     <div class="div_user">
         <div class="div_profile">
-            <img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="Foto de perfil">
+            <div class="div_letter">
+                <p>{{user.name[0]}}</p>
+            </div>
             <div class="div_name">
-                <p>Ofelia L</p>
-                <p>Cortador</p>
+                <p>{{user.name.slice(0, 8)}}</p>
+                <p>{{user.role}}</p>
             </div>
         </div>
         <hr>
@@ -23,23 +25,25 @@
         </ul>
     </div>
     <div class="div_Sign_off">
-        <p class="options_p"><i class="fa fa-store-slash"></i> Cerrar sesión</p>
+        <p class="options_p" (click)="sendRoute('login')"><i class="fa fa-store-slash"></i> Cerrar sesión</p>
     </div>
 </div>
 
 <!-- PARA ADMIN -->
 
-<div class="div_nav_bar" *ngIf="data.role=='admin'">
+<div class="div_nav_bar" *ngIf="user.role=='admin'">
     <div class="div_logo_name">
         <img src="../../../../assets/logo_kopay_2.png" alt="Logo KOPAY">
         <h2>KOPAY</h2>
     </div>
     <div class="div_user">
         <div class="div_profile">
-            <img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="Foto de perfil">
+            <div class="div_letter">
+                <p>{{user.name[0]}}</p>
+            </div>
             <div class="div_name">
-                <p>Keiddy G</p>
-                <p>Administrador</p>
+                <p>{{user.name.slice(0, 8)}}</p>
+                <p>{{user.role}}</p>
             </div>
         </div>
         <hr>
@@ -53,6 +57,6 @@
         </ul>
     </div>
     <div class="div_Sign_off">
-        <p class="options_p"><i class="fa fa-store-slash"></i> Cerrar sesión</p>
+        <p class="options_p"><i class="fa fa-store-slash" (click)="sendRoute('login')"></i> Cerrar sesión</p>
     </div>
 </div>

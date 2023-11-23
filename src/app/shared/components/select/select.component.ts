@@ -13,15 +13,19 @@ export class SelectComponent implements OnInit{
 
   showOptions: boolean = false;
   public call: string = ""
+  public options_update!: string[];
 
   constructor(){}
 
   ngOnInit() {
-    console.log("EL ARRAY DEL SELECT ES: "+ this.options)
     if (this.selectedValue=='Producto'){
       this.call = "name";
     }else if (this.selectedValue=='Paquete'){
       this.call = "id_package";
+    }
+    this.options_update = [...this.options];
+    if(this.select_type=='package' || this.select_type == 'employee'){ ///VERIFICA SI EMPLOYEE ENTRA O NO, OJO
+      this.removeOptions();
     }
   }
 
@@ -29,17 +33,26 @@ export class SelectComponent implements OnInit{
     this.showOptions = !this.showOptions;
   }
 
-  getOptionValue(option: any, change: boolean): string {
-    if(this.select_type != "package"){
-      this.selectedValue = option[this.call];
-    }else{
-      this.selectedValue = option;
+  removeOptions() {
+    this.options_update = [...this.options]
+    const index = this.options_update.findIndex(option => option == this.selectedValue); // Encontrar el índice del array que tiene el dato que deseo eliminar
+    if (index !== -1) { // Eliminar la opcion que ya esta en el selectedValue
+      this.options_update.splice(index, 1);
     }
+  }
 
-    if (change){
-      this.send_option.emit(this.selectedValue);
-      this.toggleOptions();
-    }
-    return this.selectedValue;
+  getOptionValue(option: any): string {
+    if (typeof option != 'string') {
+      return option[this.call];
+    } 
+    return option;
+  }
+
+  emitOptionValue(option: any, event: Event): void {
+    this.selectedValue = this.getOptionValue(option);
+    this.send_option.emit(this.selectedValue);
+    this.toggleOptions();
+    this.removeOptions();
+    event.stopPropagation();
   }
 }

@@ -1,16 +1,16 @@
 <div class="div_my_packages">
-    <app-nav-bar (send_navbar_route)="navigate($event, true)"></app-nav-bar>
+    <app-nav-bar [user]="app_service.data_user" (send_navbar_route)="navigate($event)"></app-nav-bar>
     <div class="div_body">
         <div class="div_header">
             <h3>MIS PAQUETES</h3>
         </div>
         <div class="div_filter_search">
             <div class="div_filter" *ngIf="app_service.data_user.role=='admin'">
-                <app-select [select_type]="'filter'" [options]="options_array" [selectedValue]="'Filtrar'"></app-select>
+                <app-select [select_type]="'filter'" [options]="role_options" [selectedValue]="'Filtrar'" (send_option)=" changeTableState($event, 'role')"></app-select>
             </div>
             <input type="date" class="datePicker" [(ngModel)]="selected_date" (change)="onDateChange()"[ngStyle]="{ 'width.%': app_service.data_user.role=='admin' ? 25 : 35}">
             <div class="div_main_search" [ngStyle]="{ 'width.%': app_service.data_user.role=='admin' ? 48 : 60}">
-                <app-search  [type_search]="'package'" [array_search]="array_filtered_packets" (searchResult)="receiveSearchResults($event)"></app-search>
+                <app-search  [type_search]="'package'" [array_search]="packages_array" (searchResult)="receiveSearchResults($event)"></app-search>
             </div>
         </div>
         <div class="div_blocks">
@@ -35,17 +35,17 @@
         </div>
         <!-- [ngStyle]="{ 'width.%': app_service.data_user.role=='admin' ? 25 : 35}" -->
         <div class="div_table_options_worker" *ngIf="app_service.data_user.role!='admin'">
-            <button (click)="changeTableState('Pending')" [ngClass]="{'border_style': table_status=='Pending'}">Pendientes</button>
-            <button (click)="changeTableState('all')" [ngClass]="{'border_style': table_status=='all'}">Completados</button>
-            <button (click)="changeTableState('Completed')" [ngClass]="{'border_style': table_status=='Completed'}">Por cobrar</button>
-            <button (click)="changeTableState('Closed')" [ngClass]="{'border_style': table_status=='Closed'}">Pagos</button>
+            <button (click)="changeTableState('Pending', 'state')" [ngClass]="{'border_style': table_status=='Pending'}">Pendientes</button>
+            <button (click)="changeTableState('all', 'state')" [ngClass]="{'border_style': table_status=='all'}">Completados</button>
+            <button (click)="changeTableState('Completed', 'state')" [ngClass]="{'border_style': table_status=='Completed'}">Por cobrar</button>
+            <button (click)="changeTableState('Closed', 'state')" [ngClass]="{'border_style': table_status=='Closed'}">Pagos</button>
         </div>
         <div class="div_table_options_admin" *ngIf="app_service.data_user.role=='admin'">
-            <button (click)="changeTableState('Completed')" [ngClass]="{'border_style': table_status=='Completed'}">Completados</button>
-            <button (click)="changeTableState('Closed')" [ngClass]="{'border_style': table_status=='Closed'}">Pagos</button>
+            <button (click)="changeTableState('Completed', 'state')" [ngClass]="{'border_style': table_status=='Completed'}">Completados</button>
+            <button (click)="changeTableState('Closed', 'state')" [ngClass]="{'border_style': table_status=='Closed'}">Pagos</button>
         </div>
         <div class="div_table_main">
-            <app-table [data]="array_filtered_packets" [type_table]="'package'"></app-table>
+            <app-table [data]="array_filtered_packets" [type_table]="'package'" (send_detail_route)="navigate($event)"></app-table>
         </div>
     </div>
 </div>

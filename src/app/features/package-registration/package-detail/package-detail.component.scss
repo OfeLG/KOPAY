@@ -34,6 +34,9 @@
             }
             div{
                 width: 150px;
+                .buttons{
+                    width: 100%;
+                }
             }
         }
         .package_data_worker, .package_data_admin{
@@ -41,7 +44,7 @@
             grid-template-columns: repeat(2, 1fr); /* 2 columnas con tamaños iguales */
             width: 100%;
             padding: 7px 30px;
-            margin-top: 20px;
+            margin-top: 5px;
             box-sizing: border-box;
             color: $dark-blue;
             p{
@@ -55,7 +58,7 @@
         .div_table_main{
             width: 100%;
             padding: 7px 30px;
-            margin-top: 20px;
+            margin-top: 5px;
             box-sizing: border-box;
         }
         .div_total{
@@ -68,7 +71,7 @@
                 border-bottom: 1px solid $light-gray-letter;
                 border-top: 1px solid $light-gray-letter;
                 table{
-                    width: 44%;
+                    width: 60%;
                     tfoot{
                         tr{
                             td{
@@ -79,7 +82,7 @@
                                 width: 36%;
                             }
                             td:first-child{
-                                width: 64%;
+                                width: 18%;
                             }
                         }
                     }

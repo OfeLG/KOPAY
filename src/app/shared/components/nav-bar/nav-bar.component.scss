@@ -38,10 +38,19 @@
             display: flex;
             align-items: center;
             height: 60%;
-            img{
+            .div_letter{
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 width: 45px;
                 height: 45px;
                 border-radius: 50px;
+                background: white;
+                p{
+                    font-size: 20px;
+                    color: $dark-blue;
+                    font-weight: bold;
+                }
             }
             .div_name{
                 margin-left: 10px;
@@ -86,8 +95,8 @@
     }
     .div_Sign_off{
         padding-left: 23px;
-        a{
-            text-decoration:none;
+        p{
+            cursor: pointer;
             color: rgb(224, 114, 114);
         }
     }

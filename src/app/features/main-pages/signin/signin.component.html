@@ -1,16 +1,26 @@
 <div class="div_signin">
     <div class="content" [ngStyle]="{ 'height.%': show_message ? 86 : 80 }">
         <div class="div_logo_name">
-            <img src="../../../../assets/logo_kopay.png" alt="Logo de KOPAY" (click)="navigate('main')">
-            <h1>KOPAY</h1>
+            <img src="../../../../assets/logo_kopay.png" alt="Logo de KOPAY" (click)="navigate('mainPages/main')">
+            <h2>KOPAY</h2>
         </div>
+        <input type="text" placeholder="Numero de cedula" class="input_style" [(ngModel)]="data.id_number" name="id_number">
+        <input type="text" placeholder="Nombre" class="input_style" [(ngModel)]="data.name" name="name">
         <div class="div_code">
-            <input class="input_code" type="text" placeholder="Numero de cedula" class="input_style" (focus)="show_message = true" (blur)="show_message = false">
-            <p *ngIf="show_message">Tu número de cedula debe encontrarse previamente registrado por el administrador.</p>
+            <input class="input_code" type="email" placeholder="Email" class="input_style" (focus)="show_message = true" (blur)="show_message = false" [(ngModel)]="data.email" name="email">
+            <p *ngIf="show_message">Tu email debe encontrarse previamente registrado por el administrador.</p>
         </div>
-        <input type="text" placeholder="Nombre" class="input_style">
-        <input type="email" placeholder="Correo electrónico" class="input_style">
-        <input type="password" placeholder="Contraseña" class="input_style">
-        <button class="buttons button_dark_blue">Crear cuenta</button>
+        <input type="password" placeholder="Contraseña" class="input_style" [(ngModel)]="data.password" name="password">
+        <button class="buttons button_dark_blue" (click)="update()">Crear cuenta</button>
+    </div>
+</div>
+
+
+<div class="modal" [ngClass]="{'show': var_modal}">
+    <div class="modal_content" [ngClass]="{'show': var_modal}">
+        <div class="content">
+            <h2>{{message ? '¡El correo ingresado no se encuentra registrado!' : '¡Su registro ha sido exitoso!'}}</h2>
+            <button (click)="this.modalActions();" class="buttons button_dark_blue">{{message ? 'Intentar nuevamente' : '¡OK!'}}</button>
+        </div>
     </div>
 </div>

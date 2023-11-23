@@ -1,26 +1,27 @@
-<div class="div_package_detail">
-    <app-nav-bar (send_navbar_route)="navigate($event)"></app-nav-bar>
+<div #contentPDF class="div_package_detail" *ngIf="detail_data">
+    <app-nav-bar [user]="app_service.data_user" (send_navbar_route)="navigate($event)"></app-nav-bar>
     <div class="div_body">
         <div class="div_header">
-            <h3>PAQUETE: 103832</h3>
-            <button class="buttons button_dark_blue" *ngIf="type_user!='admin'">Imprimir</button>
+            <h3>PAQUETE: {{detail_data.id_package}}</h3>
+            <button class="buttons button_dark_blue" *ngIf="type_user!='admin'" (click)="generatePDF()">Imprimir</button>
             <div *ngIf="type_user=='admin'">
+                <button class="buttons button_dark_blue" *ngIf="detail_data.state =='Closed'">{{detail_data.state}}</button>
                 <!-- El valor cambia segun el item de estado que se le envie -->
-                <app-select [select_type]="'Detail'" [options]="options_array" [selectedValue]="'pago'"></app-select> 
+                <app-select *ngIf="detail_data.state =='Completed'" [select_type]="'Detail'" [options]="options_array" [selectedValue]="detail_data.state"></app-select> 
             </div>
         </div>
         <div class="package_data_worker" *ngIf="type_user!='admin'">
-            <p><strong>Estado:</strong> Completado</p>
-            <p><strong>Fecha:</strong> 30/05/23</p>
+            <p><strong>Estado:</strong> {{detail_data.state}}</p>
+            <p><strong>Fecha:</strong> {{detail_data.date.slice(0, 16)}}</p>
         </div>
         <div class="package_data_admin" *ngIf="type_user=='admin'">
-            <p><strong>Identificación:</strong> 1002331</p>
-            <p><strong>Nombre:</strong> Ofelia Londoño</p>
-            <p><strong>Fecha:</strong> 30/06/23</p>
-            <p><strong>Rol:</strong> Cortador</p>
+            <p><strong>N° identificación:</strong> {{data_employee.id_number}}</p>
+            <p><strong>Nombre:</strong> {{data_employee.name}}</p>
+            <p><strong>Rol:</strong> {{data_employee.role}}</p>
+            <p><strong>Fecha:</strong> {{detail_data.date.slice(0, 16)}}</p>
         </div>
         <div class="div_table_main">
-            <app-table [data]="array_product" [type_table]="'product'"></app-table>
+            <app-table [data]="detail_data.package_details_data" [type_table]="'product'"></app-table>
         </div>
         <div class="div_total">
            <div class="div_table_total">
@@ -28,7 +29,7 @@
                     <tfoot>
                         <tr>
                             <td>Total:</td>
-                            <td>$ 300.000</td>
+                            <td>$ {{detail_data.cumulative_total}}</td>
                         </tr>
                     </tfoot>
                 </table>

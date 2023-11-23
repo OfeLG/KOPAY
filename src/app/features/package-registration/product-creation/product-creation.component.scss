@@ -1,5 +1,6 @@
 @import '../../../styles/colors-letters.scss';
 @import '../../../styles/button_input.scss';
+@import '../../../styles/modal.scss';
 
 .div_product_creation{
     display: flex;
@@ -68,29 +69,21 @@
             display: flex;
             justify-content: center;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 30px;
+            padding: 0px 30px; //5px 30px;
+            box-sizing: border-box;
             form{
                 display: flex;
                 align-items: center;
-                flex-direction: column;
-                width: 80%;
-                .div_grid{
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr); /* 2 columnas con tamaños iguales */
-                    grid-template-rows: repeat(2, auto); /* 2 filas con altura automática */
-                    gap: 20px; /* Espacio entre los elementos (puedes ajustarlo según tus necesidades) */
-                    width: 100%;
-                    .div_fields{
-                        width: 100%;
-                        .input_style, .buttons{
-                            padding: 12px !important;
-                        }
-                    }
+                justify-content: space-between;
+                width: 100%;
+                .div_fields{
+                    width: 38%;
                 }
                 button{
-                    width: 50%;
+                    width: 19%;
                 }
-                .div_grid, button{
+                .div_fields, button{
                     margin: 10px 0px;
                 }
             }
@@ -122,4 +115,21 @@ $animation-duration: 0.5s; // Duración de la animación
 
 .slideDown {
   animation: slideDown $animation-duration ease;
+}
+
+
+//MODAL
+.modal .modal_content {
+    width: 40%;
+    .content{
+        text-align: center;
+        width: 100%;
+        h2, hr{
+            color: $gray-letter;
+        }
+        button{
+            width: 35%;
+            margin-top: 20px;
+        }
+    }
 }

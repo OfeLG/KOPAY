@@ -1,5 +1,5 @@
 <div class="div_setting">
-    <app-nav-bar (send_navbar_route)="navigate($event)"></app-nav-bar>
+    <app-nav-bar [user]="app_service.data_user" (send_navbar_route)="navigate($event)"></app-nav-bar>
     <div class="div_body">
         <div class="div_header">
             <h3>CONFIGURACIÓN</h3>
@@ -8,7 +8,7 @@
             <form #myForm="ngForm">
                 <div class="div_grid">
                     <div class="div_fields">
-                        <input class="input_style" type="text" [value]="data.id_number" [disabled]="data != 'admin'">
+                        <input class="input_style" type="text" [value]="data.in_number" [disabled]="true">
                     </div>
                     <div class="div_fields">
                         <input class="input_style" type="text" [value]="data.role"  [disabled]="true">
@@ -17,7 +17,7 @@
                         <input class="input_style" type="text" [(ngModel)]="data.name" name="name">
                     </div>
                     <div class="div_fields">
-                        <input class="input_style" type="text" [value]="data.email">
+                        <input class="input_style" type="text" [value]="data.email" name="email" [disabled]="true">
                     </div>
                 </div>
                 <p>En este apartado, te ofrecemos la posibilidad de editar tu información personal, como tu nombre y correo electrónico asociado a tu cuenta en Kopay.</p>

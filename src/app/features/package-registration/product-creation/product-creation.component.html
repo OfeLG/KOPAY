@@ -1,5 +1,5 @@
 <div class="div_product_creation">
-    <app-nav-bar (send_navbar_route)="navigate($event)"></app-nav-bar>
+    <app-nav-bar [user]="app_service.data_user" (send_navbar_route)="navigate($event)"></app-nav-bar>
     <div class="div_body">
         <div class="div_header">
             <h3>PRODUCTOS</h3>
@@ -10,18 +10,13 @@
         </div>
         <div class="div_form slideDown" *ngIf="open=='form'">
             <form>
-                <div class="div_grid">
-                    <div class="div_fields">
-                        <input class="input_style" type="text" placeholder="ID Producto">
-                    </div>
-                    <div class="div_fields">
-                        <input class="input_style" type="text" placeholder="Nombre Producto">
-                    </div>
-                    <div class="div_fields">
-                        <input class="input_style" type="text" placeholder="Valor">
-                    </div>
+                <div class="div_fields">
+                    <input class="input_style" type="text" placeholder="Nombre Producto" [(ngModel)]="new_product.name" name="name">
                 </div>
-                <button type="submit" class="buttons button_dark_blue" (click)="open=''">Añadir</button>
+                <div class="div_fields">
+                    <input class="input_style" type="text" placeholder="Valor Producto" [(ngModel)]="new_product.price" name="price">
+                </div>
+                <button type="button" class="buttons button_dark_blue" (click)="create()">Añadir</button>
             </form>
         </div>
         <div class="div_main_search slideDown" *ngIf="open=='search'">
@@ -30,7 +25,16 @@
             </div>
         </div>
         <div class="div_table_main" [ngStyle]="{ 'margin-top.px': open=='form' ? 20 : 40 }">
-            <app-table [data]="filteredData.length > 0 ? filteredData : products_array" [type_table]="'add_product'"></app-table>
+            <app-table [data]="filtered_products" [type_table]="'add_product'"></app-table>
+        </div>
+    </div>
+</div>
+
+<div class="modal" [ngClass]="{'show': var_modal}">
+    <div class="modal_content" [ngClass]="{'show': var_modal}">
+        <div class="content">
+            <h2>¡Se ha creado un nuevo producto!</h2>
+            <button (click)="this.modalActions();" class="buttons button_dark_blue">OK</button>
         </div>
     </div>
 </div>

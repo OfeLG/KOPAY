@@ -17,17 +17,17 @@
       <table class="table_package">
         <tbody>
           <tr *ngFor="let item of data; let i = index">
-            <td *ngIf="type_user == 'admin'">{{ item.id_user }}</td>
-            <td>{{ item.id_package }}</td>
-            <td>{{ item.date.slice(0, 16) }}</td>
-            <td>{{ item.product_quantity }}</td>
-            <td>{{ item.cumulative_total }}</td>
+            <td *ngIf="type_user == 'admin'" (click)="sendRoute(item.id_number, item.id_package)">{{ item.id_number }}</td>
+            <td (click)="sendRoute(item.id_number, item.id_package)">{{ item.id_package }}</td>
+            <td (click)="sendRoute(item.id_number, item.id_package)">{{ item.date.slice(0, 16) }}</td>
+            <td (click)="sendRoute(item.id_number, item.id_package)">{{ item.product_quantity }}</td>
+            <td (click)="sendRoute(item.id_number, item.id_package)">{{ item.cumulative_total }}</td>
             <td>
-              <div *ngIf="type_user != 'admin' || item.state!='Completed'" class="class_worker_status" [ngStyle]="{'background': (item.state == 'Pending' ? 'rgb(223, 221, 221)' : (item.state == 'Completed' ? '#2DD1DF' : '#000B49'))}">
+              <div *ngIf="type_user != 'admin' || item.state!='Completed'" class="class_worker_status" [ngStyle]="{'background': (item.state == 'Pending' ? 'rgb(223, 221, 221)' : (item.state == 'Completed' ? '#2DD1DF' : '#000B49'))}" (click)="sendRoute(item.id_number, item.id_package)">
                 <p [ngStyle]="{'color': (item.state == 'Closed' ? 'white' :  '#000B49')}">{{ item.state }}</p>
               </div>
               <div *ngIf="type_user == 'admin' && item.state=='Completed'" class="class_admin_status">
-                <app-select [select_type]="type_table" [options]="state_options" [selectedValue]="item.state"></app-select>
+                <app-select [select_type]="type_table" [options]="state_options" [selectedValue]="item.state" (send_option)="payment($event)"></app-select>
               </div>
             </td>
           </tr>
@@ -45,7 +45,7 @@
           <th>N° Producto</th>
           <th>Nombre</th>
           <th>Fecha y Hora</th>
-          <th>Valor</th>
+          <!-- <th>Valor</th> -->
         </tr>
       </thead>
   </table>
@@ -53,10 +53,10 @@
     <table class="table_product">
       <tbody>
         <tr *ngFor="let item of data; let i = index">
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.date_hour }}</td>
-          <td>{{ item.price }}</td>
+          <td>{{ item.product_id }}</td>
+          <td>{{ item.product_name }}</td>
+          <td>{{ item.date_time.slice(0, 25) }}</td>
+          <!-- <td>{{ item.price }}</td> -->
         </tr>
       </tbody>
     </table>
@@ -105,12 +105,12 @@
     <table class="table_employee">
       <tbody>
         <tr *ngFor="let item of data; let i = index">
-          <td>{{ item.id }}</td>
+          <td>{{ item.id_number!=''? item.id_number : ''}}</td>
           <td>{{ item.name }}</td>
-          <td>{{ item.mail }}</td>
+          <td>{{ item.email }}</td>
           <td>
            <div *ngIf="type_user === 'admin'" class="class_admin_status">
-              <app-select [select_type]="type_table" [options]="role_options" [selectedValue]="item.role"></app-select>
+              <app-select [select_type]="type_table" [options]="role_options" [selectedValue]="item.role" (send_option)="updateEmployee(item, $event)"></app-select>
            </div>
           </td>
         </tr>

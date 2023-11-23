@@ -1,5 +1,5 @@
 <div class="div_product_registration">
-    <app-nav-bar (send_navbar_route)="navigate($event)"></app-nav-bar>
+    <app-nav-bar [user]="app_service.data_user" (send_navbar_route)="navigate($event)"></app-nav-bar>
     <div class="div_body">
         <div class="div_header">
             <h3>REGISTRAR PRODUCTOS</h3>

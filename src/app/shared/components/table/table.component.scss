@@ -60,7 +60,7 @@
             // border-bottom: 1px solid red; 
             .class_worker_status{
                 text-align: center;
-                width: 120px;
+                width: 110px;
                 padding: 5px;
                 border-radius: 8px; //10px
                 p{
@@ -93,13 +93,16 @@
         }
     }
     .table_product{
+        thead tr{
+            padding-right: 7px;
+        }
         th, td{
-            width: 28%;
+            width: 40%;
             padding-left: 20px; //OJO, PUEDO QUITARLO
             font-size: 13px;
         }
-        tr th:last-child, tr td:last-child{
-            width: 16%;
+        th:nth-child(2), td:nth-child(2){
+            width: 20%;
         }
         tr:last-child{
             border-bottom: none;

@@ -23,27 +23,36 @@ export class SettingComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.data = this.app_service.data_user;
+    this.data = {
+      name: this.app_service.data_user.name,
+      email: this.app_service.data_user.email,
+      id_number: this.app_service.data_user.id_number,
+      role: this.app_service.data_user.role,
+      password: this.app_service.data_user.password
+    };
   }
 
   navigate(page: string){
-    this._router.navigate(['packageRegistration/'+page]);
+    if(page == "login"){
+      this._router.navigate(['mainPages/'+page]);
+      return;
+    }else{
+      this._router.navigate(['packageRegistration/'+page]);
+    }
   }
-
   modalActions(){
     this.var_modal = !this.var_modal;
   }
 
   update() {
-    const user_id_number = this.app_service.data_user.id_number; 
     if (this.myForm.dirty) { // Verificar si el formulario ha sido modificado
-      this.app_service.updateUser(this.data.name, user_id_number).subscribe(
+      this.app_service.updateUser(this.data).subscribe(
         (response) => {
           this.app_service.data_user = response.users;
           this.modalActions();
         },
         (error) => {
-          console.error('Error al registrar el producto:', error);
+          console.error('Error al editar el usuario:', error);
         }
       );
     }else{

@@ -1,5 +1,6 @@
 @import '../../../styles/colors-letters.scss';
 @import '../../../styles/button_input.scss';
+@import '../../../styles/modal.scss';
 
 .div_employee{
     display: flex;
@@ -115,3 +116,24 @@ $animation-duration: 0.5s; // Duración de la animación
 .slideDown {
   animation: slideDown $animation-duration ease;
 }
+
+//MODAL
+.modal .modal_content {
+    width: 40%;
+    .content{
+        text-align: center;
+        width: 100%;
+        h2, hr{
+            color: $gray-letter;
+        }
+        button{
+            width: 35%;
+            margin-top: 20px;
+        }
+
+        .change_width{
+            width: 45%;
+        }
+    }
+}
+

@@ -45,7 +45,12 @@ export class ProductRegistrationComponent implements OnInit{
   }
 
   navigate(page: string){
-    this._router.navigate(['packageRegistration/'+page]);
+    if(page == "login"){
+      this._router.navigate(['mainPages/'+page]);
+      return;
+    }else{
+      this._router.navigate(['packageRegistration/'+page]);
+    }
   }
 
   updateInput(option: any, type: string){

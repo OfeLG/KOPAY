@@ -36,12 +36,5 @@
         .div_logo_name, button, input{
             margin-bottom: 20px;
         }
-        a{
-            text-decoration: none;
-            color: $gray-letter;
-            &:hover{
-                color: $dark-blue;
-            }
-        }
     }
 }
